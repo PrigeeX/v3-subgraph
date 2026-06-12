@@ -10,7 +10,7 @@ import {
   updatePoolHourData,
   updateTokenDayData,
   updateTokenHourData,
-  updateUniswapDayData,
+  updatePrigeeXDayData,
 } from './intervalUpdates'
 import { createTick } from './tick'
 import { loadTransaction } from './utils'
@@ -121,7 +121,7 @@ export function handleMint(event: MintEvent): void {
     // TODO: Update Tick's volume, fees, and liquidity provider count. Computing these on the tick
     // level requires reimplementing some of the swapping code from v3-core.
 
-    updateUniswapDayData(event, factoryAddress.toHexString())
+    updatePrigeeXDayData(event, factoryAddress.toHexString())
     updatePoolDayData(event)
     updatePoolHourData(event)
     updateTokenDayData(token0 as Token, event)

@@ -9,7 +9,7 @@ import {
   Token,
   TokenDayData,
   TokenHourData,
-  UniswapDayData,
+  PrigeeXDayData,
 } from '../../../generated/schema'
 import { ONE_BI, ZERO_BD, ZERO_BI } from '../../common/constants'
 
@@ -17,24 +17,24 @@ import { ONE_BI, ZERO_BD, ZERO_BI } from '../../common/constants'
  * Tracks global aggregate data over daily windows
  * @param event
  */
-export function updateUniswapDayData(event: ethereum.Event, factoryAddress: string): UniswapDayData {
-  const uniswap = Factory.load(factoryAddress)!
+export function updatePrigeeXDayData(event: ethereum.Event, factoryAddress: string): PrigeeXDayData {
+  const prigeex = Factory.load(factoryAddress)!
   const timestamp = event.block.timestamp.toI32()
   const dayID = timestamp / 86400 // rounded
   const dayStartTimestamp = dayID * 86400
-  let uniswapDayData = UniswapDayData.load(dayID.toString())
-  if (uniswapDayData === null) {
-    uniswapDayData = new UniswapDayData(dayID.toString())
-    uniswapDayData.date = dayStartTimestamp
-    uniswapDayData.volumeETH = ZERO_BD
-    uniswapDayData.volumeUSD = ZERO_BD
-    uniswapDayData.volumeUSDUntracked = ZERO_BD
-    uniswapDayData.feesUSD = ZERO_BD
+  let prigeexDayData = PrigeeXDayData.load(dayID.toString())
+  if (prigeexDayData === null) {
+    prigeexDayData = new PrigeeXDayData(dayID.toString())
+    prigeexDayData.date = dayStartTimestamp
+    prigeexDayData.volumeETH = ZERO_BD
+    prigeexDayData.volumeUSD = ZERO_BD
+    prigeexDayData.volumeUSDUntracked = ZERO_BD
+    prigeexDayData.feesUSD = ZERO_BD
   }
-  uniswapDayData.tvlUSD = uniswap.totalValueLockedUSD
-  uniswapDayData.txCount = uniswap.txCount
-  uniswapDayData.save()
-  return uniswapDayData as UniswapDayData
+  prigeexDayData.tvlUSD = prigeex.totalValueLockedUSD
+  prigeexDayData.txCount = prigeex.txCount
+  prigeexDayData.save()
+  return prigeexDayData as PrigeeXDayData
 }
 
 export function updatePoolDayData(event: ethereum.Event): PoolDayData {

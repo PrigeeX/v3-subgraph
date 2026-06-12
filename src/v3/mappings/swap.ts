@@ -11,7 +11,7 @@ import {
   updatePoolHourData,
   updateTokenDayData,
   updateTokenHourData,
-  updateUniswapDayData,
+  updatePrigeeXDayData,
 } from './intervalUpdates'
 import { loadTransaction } from './utils'
 
@@ -156,7 +156,7 @@ export function handleSwap(event: SwapEvent): void {
     swap.logIndex = event.logIndex
 
     // interval data
-    const uniswapDayData = updateUniswapDayData(event, factoryAddress.toHexString())
+    const prigeexDayData = updatePrigeeXDayData(event, factoryAddress.toHexString())
     const poolDayData = updatePoolDayData(event)
     const poolHourData = updatePoolHourData(event)
     const token0DayData = updateTokenDayData(token0 as Token, event)
@@ -165,9 +165,9 @@ export function handleSwap(event: SwapEvent): void {
     const token1HourData = updateTokenHourData(token1 as Token, event)
 
     // update volume metrics
-    uniswapDayData.volumeETH = uniswapDayData.volumeETH.plus(amountTotalETHTracked)
-    uniswapDayData.volumeUSD = uniswapDayData.volumeUSD.plus(amountTotalUSDTracked)
-    uniswapDayData.feesUSD = uniswapDayData.feesUSD.plus(feesUSD)
+    prigeexDayData.volumeETH = prigeexDayData.volumeETH.plus(amountTotalETHTracked)
+    prigeexDayData.volumeUSD = prigeexDayData.volumeUSD.plus(amountTotalUSDTracked)
+    prigeexDayData.feesUSD = prigeexDayData.feesUSD.plus(feesUSD)
 
     poolDayData.volumeUSD = poolDayData.volumeUSD.plus(amountTotalUSDTracked)
     poolDayData.volumeToken0 = poolDayData.volumeToken0.plus(amount0Abs)
@@ -202,7 +202,7 @@ export function handleSwap(event: SwapEvent): void {
     swap.save()
     token0DayData.save()
     token1DayData.save()
-    uniswapDayData.save()
+    prigeexDayData.save()
     poolDayData.save()
     poolHourData.save()
     token0HourData.save()

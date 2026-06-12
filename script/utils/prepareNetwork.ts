@@ -17,6 +17,7 @@ export enum NETWORK {
   MEGAETH = 'megaeth-mainnet',
   MONAD = 'monad',
   OPTIMISM = 'optimism',
+  PRIGEEX_ARBITRUM_SEPOLIA = 'prigeex-arbitrum-sepolia',
   ROBINHOOD = 'robinhood-mainnet',
   SONEIUM = 'soneium-mainnet',
   TEMPO = 'tempo',

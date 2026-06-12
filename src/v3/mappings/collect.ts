@@ -11,7 +11,7 @@ import {
   updatePoolHourData,
   updateTokenDayData,
   updateTokenHourData,
-  updateUniswapDayData,
+  updatePrigeeXDayData,
 } from './intervalUpdates'
 import { loadTransaction } from './utils'
 
@@ -87,7 +87,7 @@ export function handleCollect(event: CollectEvent): void {
   collect.tickUpper = BigInt.fromI32(event.params.tickUpper)
   collect.logIndex = event.logIndex
 
-  updateUniswapDayData(event, factoryAddress.toHexString())
+  updatePrigeeXDayData(event, factoryAddress.toHexString())
   updatePoolDayData(event)
   updatePoolHourData(event)
   updateTokenDayData(token0 as Token, event)
